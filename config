@@ -1,0 +1,223 @@
+[colors]
+transparent                   = #00000000
+background                    = #0F1C32
+foreground                    = #778892
+alert                         = #DAD9D4
+
+[settings]
+screenchange-reload           = true
+pseudo-transparency           = true
+
+[global/wm]
+margin-top                    = 0 
+margin-bottom                 = 0
+
+wm-restack                    = bspwm
+override-redirect	          = true
+
+
+
+[bar/base]
+monitor                       = 
+locale                        = pt_BR.UTF-8
+dpi                           = 96
+
+## BOTTOM CENTER
+[bar/bottom-center]
+inherit                       = bar/base
+height                        = 14
+width                         = 24%
+offset-x                      = 40.4%
+offset-y                      = 11
+
+fixed-center                  = true
+bottom                        = true
+
+modules-center                = bspwm
+wm-restack                    = bspwm
+
+
+background                    = ${colors.transparent}
+foreground                    = #000
+
+font-0                        = Fira Mono:style=Regular:size=8;2
+font-1                        = Material Icons:style=Regular:size=9;2
+
+
+## TOP LEFT
+[bar/top-left]
+height                        = 9
+
+width                         = 189
+offset-x                      = 13
+offset-y                      = 9
+
+fixed-center                  = true
+modules-left                  = date
+wm-restack                    = bspwm
+
+
+background                    = ${colors.transparent}
+foreground                    = #000
+
+font-0                        = Fira Mono:style=Regular:size=8;2
+font-1                        = Material Icons:style=Regular:size=8;2
+
+
+
+## BOTTOM LEFT
+[bar/bottom-left]
+inherit                       = bar/base
+height                        = 14
+width                         = 550
+offset-x                      = 20
+offset-y                      = 11
+
+fixed-center                  = true
+modules-left                  = battery xwindow
+bottom                        = true
+wm-restack                    = bspwm
+
+
+background                    = ${colors.transparent}
+foreground                    = ${colors.background}
+
+font-0                        = Fira Mono:style=thin:size=8;0
+font-1                        = Material Icons:style=Light:size=10;0
+font-2			      = FontAwesome5Free:style=Light:size=10
+font-3    		      = FontAwesome5Free:style=Light:size=10
+font-4 			      = FontAwesome5Brands:style=Light:size=10
+font-5			      = Iosevka Nerd Font:style=Medium:size=10:2
+font-6 			      = Symbols Nerd Font:pixelsize=10;3
+font-7 			      = SF Mono:Semibold:size=9.5;3
+
+
+## MODULES
+[module/bspwm]
+type                          = internal/bspwm
+
+label-focused                 = 
+label-focused-padding         = 1
+label-focused-foreground      = #444
+
+label-occupied                = 
+label-occupied-padding        = 1
+label-occupied-foreground     = ${colors.background}
+
+label-urgent                  = %index%!
+label-urgent-background       = #444
+label-urgent-padding          = 1
+
+label-empty                   = 
+label-empty-padding           = 1
+label-empty-foreground        = #444
+
+[module/date]
+type                          = internal/date
+interval                      = 1
+date                          = "%A %d %b"
+time                          = %H:%M:%S
+label                         = %date% | %time%
+
+[module/music]
+type                          = custom/script
+exec                          = $HOME/.config/polybar/scripts/mediaplayer.py
+exec-if                       = pgrep -x spotify
+interval                      = 1
+
+label                         = "%{T2}%{T-} %output:0:120:..%"
+format-padding                = 0
+
+click-left                    = dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+click-middle                  = dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+click-right                   = dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+
+[module/powermenu]
+type                          = custom/menu
+expand-right                  = true
+
+format-spacing                = 2
+
+label-open                    = ""
+label-close                   = ""
+label-separator               = |
+
+menu-0-0                      = ""
+menu-0-0-exec                 = sudo shutdown -r now
+menu-0-1                      = ""
+menu-0-1-exec                 = sudo shutdown -h now
+
+[module/pulseaudio-control]
+type                          = custom/script
+tail                          = true
+label                         = %output%
+
+exec                          = $HOME/.config/polybar/scripts/pulseaudio-control listen
+click-right                   = exec pavucontrol &
+click-left                    = $HOME/.config/polybar/scripts/pulseaudio-control togmute
+click-middle                  = $HOME/.config/polybar/scripts/pulseaudio-control next-sink
+scroll-up                     = $HOME/.config/polybar/scripts/pulseaudio-control up
+scroll-down                   = $HOME/.config/polybar/scripts/pulseaudio-control down
+label-padding                 = 0
+
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = python $HOME/.config/polybar/scripts/spotify_status.py -p '[playing],[paused]'
+format-underline = #1db954
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %title%
+label-maxlen = 60
+format-prefix = " >> "
+format-prefix-foreground = ${colors.background}
+format-foreground = ${colors.background}
+format-background = ${colors.transparent
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+poll-interval = 1
+full-at = 96
+# Full
+label-full =  %percentage%%
+format-full = <label-full>
+format-full-padding = 0
+
+# Charging
+label-charging = %percentage%%
+format-charging = <label-charging>
+# format-charging = <animation-charging>  <label-charging>
+format-charging-padding = 1
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+#
+# animation-charging-framerate = 500
+
+# Discharging
+label-discharging = %percentage%%
+format-discharging = <ramp-capacity>  <label-discharging>
+format-discharging-background = ${colors.transparent}
+format-discharging-padding = 1
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+[module/pro-mode]
+type = custom/script
+format-prefix = "Work "  
+exec = ~/.config/polybar/profile-switcher.sh
+click-left = ~/.config/polybar/profile-switcher.sh toggle
+interval=0
