@@ -1,8 +1,40 @@
 [colors]
 transparent                   = #00000000
 background                    = #0F1C32
-foreground                    = #778892
+foreground                    = #FFF
 alert                         = #DAD9D4
+accent                        = #cc241d
+accent-2                      = #d79921
+accent-3                      = #458588
+
+[fonts]
+font-0                        = Fira Mono:style=Regular:size=8;2
+font-1                        = Material Icons:style=Regular:size=9;2
+font-2                        = Hack Regular:size=10.0;2
+font-3                        = FontAwesome:style=Regular:pixelsize=11:antialias=false;2
+font-4                        = Weather Icons:size=11;2
+font-5                        = Font Awesome 6 Free:style=Regular:pixelsize=9;2
+font-6                        = Font Awesome 6 Free:style=Solid:pixelsize=9;2
+font-7                        = Font Awesome 6 Brands:pixelsize=9;2
+font-8                        = Font Awesome 6 Pro:pixelsize=9;2
+font-9                        = Fira Mono:style=thin:size=8;0
+font-10                       = Material Icons:style=Light:size=10;0
+font-11                       = Font Awesome 5 Free:style=Light:size=9
+font-12                       = Font Awesome 5 Free:style=Regular:size= 8
+font-13                       = Font Awesome 5 Brands:style=Light:size=10
+font-14                       = Iosevka Nerd Font:style=Medium:size=10:2
+font-15                       = Symbols Nerd Font:pixelsize=10;3
+font-16                       = SF Mono:Semibold:size=9.5;3
+font-17                       = Font Awesome 5 Brands:style=Regular:size=10
+font-18                       = Font Awesome 5 Pro:style=Light:size=10
+font-19                       = Font Awesome 5 pro:style=Duotone:size=10
+font-20                       = Font Awesome 5 Pro:style=Regular:size=10
+font-21                       = Font Awesome 5 Free:style=Regular:size=10
+font-22                       = Font Awesome 5 Pro:style=Solid:size=10
+font-23                       = Font Awesome 5 Free:style=Solid:size=10
+
+
+
 
 [settings]
 screenchange-reload           = true
@@ -13,7 +45,7 @@ margin-top                    = 0
 margin-bottom                 = 0
 
 wm-restack                    = bspwm
-override-redirect	          = true
+override-redirect	            = true
 
 
 
@@ -21,27 +53,6 @@ override-redirect	          = true
 monitor                       = 
 locale                        = pt_BR.UTF-8
 dpi                           = 96
-
-## BOTTOM CENTER
-[bar/bottom-center]
-inherit                       = bar/base
-height                        = 14
-width                         = 24%
-offset-x                      = 40.4%
-offset-y                      = 11
-
-fixed-center                  = true
-bottom                        = true
-
-modules-center                = bspwm
-wm-restack                    = bspwm
-
-
-background                    = ${colors.transparent}
-foreground                    = #000
-
-font-0                        = Fira Mono:style=Regular:size=8;2
-font-1                        = Material Icons:style=Regular:size=9;2
 
 
 ## TOP LEFT
@@ -58,11 +69,10 @@ wm-restack                    = bspwm
 
 
 background                    = ${colors.transparent}
-foreground                    = #000
+foreground                    = #fff
 
-font-0                        = Fira Mono:style=Regular:size=8;2
-font-1                        = Material Icons:style=Regular:size=8;2
-
+font-0                        = ${fonts.font-0}
+font-1                        = ${fonts.font-1}
 
 
 ## BOTTOM LEFT
@@ -80,37 +90,60 @@ wm-restack                    = bspwm
 
 
 background                    = ${colors.transparent}
-foreground                    = ${colors.background}
+foreground                    = #FFF
 
 font-0                        = Fira Mono:style=thin:size=8;0
 font-1                        = Material Icons:style=Light:size=10;0
-font-2			      = FontAwesome5Free:style=Light:size=10
-font-3    		      = FontAwesome5Free:style=Light:size=10
-font-4 			      = FontAwesome5Brands:style=Light:size=10
-font-5			      = Iosevka Nerd Font:style=Medium:size=10:2
-font-6 			      = Symbols Nerd Font:pixelsize=10;3
-font-7 			      = SF Mono:Semibold:size=9.5;3
+font-2                        = FontAwesome5Free:style=Light:size=10
+font-3                        = FontAwesome5Free:style=Light:size=10
+font-4                        = FontAwesome5Brands:style=Light:size=10
+font-5                        = Iosevka Nerd Font:style=Medium:size=10:2
+font-6                        = Symbols Nerd Font:pixelsize=10;3
+font-7                        = SF Mono:Semibold:size=9.5;3
+
+
+## BOTTOM RIGHT
+[bar/bottom-right]
+inherit                       = bar/base
+height                        = 15
+width                         = 24%
+offset-x                      = 82.2%
+offset-y                      = 8
+
+fixed-center                  = true
+bottom                        = true
+
+modules-center                = bspwm
+wm-restack                    = bspwm
+
+
+background                    =  ${colors.transparent}
+foreground                    = #FFF
+
+
+font-0                        = ${fonts.font-12}
 
 
 ## MODULES
 [module/bspwm]
 type                          = internal/bspwm
 
-label-focused                 = 
+label-focused                 = 
 label-focused-padding         = 1
-label-focused-foreground      = #444
+label-focused-foreground      = #af3a03
 
-label-occupied                = 
+label-occupied                = 
 label-occupied-padding        = 1
-label-occupied-foreground     = ${colors.background}
+## label-occupied-foreground  = ${colors.accent-2}
 
 label-urgent                  = %index%!
-label-urgent-background       = #444
+label-urgent-background       = #fff
 label-urgent-padding          = 1
 
-label-empty                   = 
+label-empty                   = 
 label-empty-padding           = 1
-label-empty-foreground        = #444
+label-empty-foreground        = #ddd
+
 
 [module/date]
 type                          = internal/date
@@ -118,19 +151,6 @@ interval                      = 1
 date                          = "%A %d %b"
 time                          = %H:%M:%S
 label                         = %date% | %time%
-
-[module/music]
-type                          = custom/script
-exec                          = $HOME/.config/polybar/scripts/mediaplayer.py
-exec-if                       = pgrep -x spotify
-interval                      = 1
-
-label                         = "%{T2}%{T-} %output:0:120:..%"
-format-padding                = 0
-
-click-left                    = dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-click-middle                  = dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-click-right                   = dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
 [module/powermenu]
 type                          = custom/menu
@@ -147,35 +167,14 @@ menu-0-0-exec                 = sudo shutdown -r now
 menu-0-1                      = ""
 menu-0-1-exec                 = sudo shutdown -h now
 
-[module/pulseaudio-control]
-type                          = custom/script
-tail                          = true
-label                         = %output%
-
-exec                          = $HOME/.config/polybar/scripts/pulseaudio-control listen
-click-right                   = exec pavucontrol &
-click-left                    = $HOME/.config/polybar/scripts/pulseaudio-control togmute
-click-middle                  = $HOME/.config/polybar/scripts/pulseaudio-control next-sink
-scroll-up                     = $HOME/.config/polybar/scripts/pulseaudio-control up
-scroll-down                   = $HOME/.config/polybar/scripts/pulseaudio-control down
-label-padding                 = 0
-
-[module/spotify]
-type = custom/script
-interval = 1
-format-prefix = " "
-format = <label>
-exec = python $HOME/.config/polybar/scripts/spotify_status.py -p '[playing],[paused]'
-format-underline = #1db954
-
 
 [module/xwindow]
 type = internal/xwindow
 label = %title%
 label-maxlen = 60
 format-prefix = " >> "
-format-prefix-foreground = ${colors.background}
-format-foreground = ${colors.background}
+format-prefix-foreground = ${colors.foreground}
+format-foreground = ${colors.foreground}
 format-background = ${colors.transparent
 
 [module/battery]
@@ -215,9 +214,3 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
-[module/pro-mode]
-type = custom/script
-format-prefix = "Work "  
-exec = ~/.config/polybar/profile-switcher.sh
-click-left = ~/.config/polybar/profile-switcher.sh toggle
-interval=0
